@@ -1,0 +1,92 @@
+package cn.xbatis.plus.base;
+
+import cn.xbatis.core.sql.executor.chain.DeleteChain;
+import cn.xbatis.core.sql.executor.chain.QueryChain;
+import cn.xbatis.core.sql.executor.chain.UpdateChain;
+import cn.xbatis.plus.dto.PageDto;
+import cn.xbatis.plus.utils.PageUtil;
+import cn.xbatis.plus.vo.PageVo;
+import db.sql.api.impl.cmd.struct.Where;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
+
+public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
+
+    @Autowired
+    protected D baseMapper;
+
+    @Override
+    public QueryChain<T> lambdaQuery() {
+        return QueryChain.of(baseMapper);
+    }
+
+    @Override
+    public UpdateChain lambdaUpdate() {
+        return UpdateChain.of(baseMapper);
+    }
+
+    @Override
+    public DeleteChain lambdaDelete() {
+        return DeleteChain.of(baseMapper);
+    }
+
+    @Override
+    public T getById(Serializable id) {
+        return this.baseMapper.getById(id);
+    }
+
+    @Override
+    public List<T> list() {
+        return this.baseMapper.listAll();
+    }
+
+    @Override
+    public List<T> listByIds(Collection<? extends Serializable> ids) {
+        return this.baseMapper.listByIds(ids);
+    }
+
+    @Override
+    public PageVo<T> page(PageDto<T> pageDto) {
+        PageUtil.startPage(pageDto);
+        return new PageVo<>(this.baseMapper.page(pageDto));
+    }
+
+    @Override
+    public boolean saveBatch(Collection<T> list) {
+        return this.baseMapper.saveBatch(list) > 0;
+    }
+
+    @Override
+    public boolean updateById(T entity) {
+        return this.baseMapper.update(entity) > 0;
+    }
+
+    @Override
+    public boolean updateBatchById(Collection<T> list) {
+        return this.baseMapper.updateBatch(list) > 0;
+    }
+
+    @Override
+    public boolean saveOrUpdate(T entity) {
+        return this.baseMapper.saveOrUpdate(entity) > 0;
+    }
+
+    @Override
+    public boolean saveOrUpdateBatch(Collection<T> list) {
+        return this.baseMapper.saveOrUpdate(list) > 0;
+    }
+
+    @Override
+    public boolean deleteById(Serializable id) {
+        return this.baseMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public boolean deleteBatchByIds(Collection<? extends Serializable> ids) {
+        return this.baseMapper.deleteByIds(ids) > 0;
+    }
+}
