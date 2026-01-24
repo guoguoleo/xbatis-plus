@@ -11,7 +11,7 @@ public class XbatisHelper {
     public MapperScannerConfigurer helpMapperScanner() {
         MapperScannerConfigurer scanner = new MapperScannerConfigurer();
         // 核心：指定 Mapper 接口所在的包路径（支持多个包，用逗号分隔）
-        scanner.setBasePackage("cn.xbatis.plus.helper");
+        scanner.setBasePackage("cn.xbatis.plus.mapper");
         return scanner;
     }
 

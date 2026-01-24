@@ -1,31 +1,39 @@
 package cn.xbatis.plus;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
+import cn.xbatis.plus.interceptor.XbatisInterceptor;
 import cn.xbatis.plus.properties.PlusScanProperties;
-import jakarta.annotation.Resource;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-@Component
 public class GlobalGenerator {
 
-    @Resource
+    @Autowired
     private ModifyListenerHelper modifyListenerHelper;
 
-    @Resource
+    @Autowired
     private PlusScanProperties plusScanProperties;
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
         return configuration -> {
+            XbatisInterceptor xbatisInterceptor = this.xbatisInterceptor();
+            if (CollUtil.isNotEmpty(xbatisInterceptor.getInterceptorList())) {
+                for (Interceptor interceptor : xbatisInterceptor.getInterceptorList()) {
+                    configuration.addInterceptor(interceptor);
+                }
+            }
+
             XbatisGlobalConfig.setLogicDeleteSwitch(this.plusScanProperties.getLogicDeleteSwitch());
             //region 加载自定义id
             GeneratorFactory.register(IdGeneratorConstant.snow, new SnowIdHelper());
@@ -39,10 +47,20 @@ public class GlobalGenerator {
             //逻辑删除监听
             XbatisGlobalConfig.setLogicDeleteInterceptor((clazz, update) ->
                     modifyListenerHelper.setLogicDeleteInterceptor(clazz, update));
+
+
+            XbatisGlobalConfig.enableInterceptOfficialMapperMethod();
+
         };
+
     }
 
-
+    /**
+     * 拦截器
+     */
+    public XbatisInterceptor xbatisInterceptor(){
+        return new XbatisInterceptor();
+    }
 
 
     private static class SnowIdHelper implements Generator<Serializable> {
