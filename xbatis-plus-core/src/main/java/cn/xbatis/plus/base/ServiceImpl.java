@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
 

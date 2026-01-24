@@ -1,7 +1,6 @@
 package cn.xbatis.plus.helper;
 
 import cn.xbatis.core.sql.executor.BaseUpdate;
-import org.springframework.stereotype.Component;
 
 public class ModifyListenerHelper {
 
