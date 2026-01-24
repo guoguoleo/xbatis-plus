@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
+import cn.xbatis.core.mybatis.mapper.intercept.MethodInterceptor;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
@@ -29,8 +30,9 @@ public class GlobalGenerator {
         return configuration -> {
             XbatisInterceptor xbatisInterceptor = this.xbatisInterceptor();
             if (CollUtil.isNotEmpty(xbatisInterceptor.getInterceptorList())) {
-                for (Interceptor interceptor : xbatisInterceptor.getInterceptorList()) {
-                    configuration.addInterceptor(interceptor);
+                XbatisGlobalConfig.enableInterceptOfficialMapperMethod();
+                for (MethodInterceptor interceptor : xbatisInterceptor.getInterceptorList()) {
+                    XbatisGlobalConfig.addMapperMethodInterceptor(interceptor);
                 }
             }
 
