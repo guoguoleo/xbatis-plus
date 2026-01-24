@@ -1,11 +1,11 @@
 package cn.xbatis.plus.utils;
 
-import cn.xbatis.plus.dto.PageDto;
+import cn.xbatis.plus.dto.PagerDto;
 
 public class PageUtil {
 
-    public static<T> void startPage(PageDto<T> pageDto){
-        pageDto.setSize(pageDto.getPageSize());
-        pageDto.setNumber(pageDto.getPageNumber());
+    public static<T> void startPage(PagerDto<T> pagerDto){
+        pagerDto.setSize(pagerDto.getPageSize());
+        pagerDto.setNumber(pagerDto.getPageNumber());
     }
 }

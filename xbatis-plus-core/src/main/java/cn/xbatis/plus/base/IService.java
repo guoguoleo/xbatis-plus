@@ -3,8 +3,8 @@ package cn.xbatis.plus.base;
 import cn.xbatis.core.sql.executor.chain.DeleteChain;
 import cn.xbatis.core.sql.executor.chain.QueryChain;
 import cn.xbatis.core.sql.executor.chain.UpdateChain;
-import cn.xbatis.plus.dto.PageDto;
-import cn.xbatis.plus.vo.PageVo;
+import cn.xbatis.plus.dto.PagerDto;
+import cn.xbatis.plus.vo.PagerVo;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -55,7 +55,7 @@ public interface IService<T> {
      * @param pageDto 分页参数
      * @return 分页结果
      */
-    PageVo<T> page(PageDto<T> pageDto);
+    PagerVo<T> page(PagerDto<T> pageDto);
 
     /**
      * 批量保存

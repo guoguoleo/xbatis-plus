@@ -3,10 +3,9 @@ package cn.xbatis.plus.base;
 import cn.xbatis.core.sql.executor.chain.DeleteChain;
 import cn.xbatis.core.sql.executor.chain.QueryChain;
 import cn.xbatis.core.sql.executor.chain.UpdateChain;
-import cn.xbatis.plus.dto.PageDto;
+import cn.xbatis.plus.dto.PagerDto;
 import cn.xbatis.plus.utils.PageUtil;
-import cn.xbatis.plus.vo.PageVo;
-import db.sql.api.impl.cmd.struct.Where;
+import cn.xbatis.plus.vo.PagerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -50,9 +49,9 @@ public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
     }
 
     @Override
-    public PageVo<T> page(PageDto<T> pageDto) {
+    public PagerVo<T> page(PagerDto<T> pageDto) {
         PageUtil.startPage(pageDto);
-        return new PageVo<>(this.baseMapper.page(pageDto));
+        return new PagerVo<>(this.baseMapper.page(pageDto));
     }
 
     @Override

@@ -9,16 +9,16 @@ import java.util.List;
  *
  * @param <T>
  */
-public class PageVo<T> {
+public class PagerVo<T> {
 
     private long total;
 
     private List<T> list;
 
-    public PageVo() {
+    public PagerVo() {
     }
 
-    public PageVo(Pager<T> page) {
+    public PagerVo(Pager<T> page) {
         this.list = page.getResults();
         this.total = page.getTotal();
     }

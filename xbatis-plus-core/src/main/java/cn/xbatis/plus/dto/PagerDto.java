@@ -5,7 +5,7 @@ import cn.xbatis.core.mybatis.mapper.context.Pager;
 /**
  * 分页基类
  */
-public class PageDto<T> extends Pager<T> {
+public class PagerDto<T> extends Pager<T> {
 
     private int pageNumber = 1;
 
