@@ -1,11 +1,14 @@
 package cn.xbatis.plus.supports;
 
 import cn.hutool.log.Log;
-import cn.xbatis.core.sql.executor.Update;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
+import net.sf.jsqlparser.statement.delete.Delete;
+import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Select;
+import net.sf.jsqlparser.statement.update.Update;
 import org.apache.ibatis.mapping.BoundSql;
 
 public class JSqlParseSupports {
@@ -17,8 +20,14 @@ public class JSqlParseSupports {
             String sql = boundSql.getSql();
             Statement statement = CCJSqlParserUtil.parse(sql);
 
-            if (statement instanceof PlainSelect plainSelect) {
-                execute(plainSelect, boundSql);
+            if (statement instanceof Insert insert) {
+                this.processInsert(insert, boundSql);
+            } else if (statement instanceof PlainSelect plainSelect) {
+                this.processSelect(plainSelect, boundSql);
+            } else if (statement instanceof Update update) {
+                this.processUpdate(update, boundSql);
+            } else if (statement instanceof Delete delete) {
+                this.processDelete(delete, boundSql);
             }
             return statement;
         } catch (JSQLParserException e) {
@@ -31,8 +40,20 @@ public class JSqlParseSupports {
     /**
      * 处理select
      */
-    public void execute(PlainSelect plainSelect, BoundSql boundSql) {
+    protected void processInsert(Insert insert, BoundSql boundSql) {
+        throw new UnsupportedOperationException();
+    }
 
+    protected void processDelete(Delete delete, BoundSql boundSql) {
+        throw new UnsupportedOperationException();
+    }
+
+    protected void processUpdate(Update update, BoundSql boundSql) {
+        throw new UnsupportedOperationException();
+    }
+
+    protected void processSelect(PlainSelect plainSelect, BoundSql boundSql) {
+        throw new UnsupportedOperationException();
     }
 
 
