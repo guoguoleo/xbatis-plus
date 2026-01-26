@@ -31,6 +31,19 @@
             <artifactId>hutool-core</artifactId>
             <version>5.8.43</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-log</artifactId>
+            <version>5.8.22</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>4.7</version>
+        </dependency>
+
     </dependencies>
 
 </project>
