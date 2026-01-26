@@ -29,7 +29,7 @@ public class JSqlParseSupports {
     }
 
     /**
-     * 处理select方法拦截
+     * 处理select
      */
     public void execute(PlainSelect plainSelect, BoundSql boundSql) {
 

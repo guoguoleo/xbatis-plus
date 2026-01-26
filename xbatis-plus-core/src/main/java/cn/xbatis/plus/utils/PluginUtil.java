@@ -46,10 +46,14 @@ public class PluginUtil {
             this.boundSql = PluginUtil.getMetaObject(boundSql);
         }
 
+
         public String sql() {
             return delegate.getSql();
         }
 
+        /**
+         * 运行sql
+         */
         public void sql(String sql) {
             boundSql.setValue("sql", sql);
         }
