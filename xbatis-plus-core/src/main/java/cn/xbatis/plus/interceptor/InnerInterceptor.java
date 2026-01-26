@@ -45,7 +45,7 @@ public interface InnerInterceptor {
      * @param resultHandler resultHandler
      * @param boundSql      boundSql
      */
-    default void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) throws SQLException {
+    default void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler<?> resultHandler, BoundSql boundSql) throws SQLException {
         // do nothing
     }
 

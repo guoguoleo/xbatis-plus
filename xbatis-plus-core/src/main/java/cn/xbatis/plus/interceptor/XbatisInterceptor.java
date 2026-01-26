@@ -28,8 +28,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 )
 public class XbatisInterceptor implements Interceptor {
 
-    private final Log log = Log.get(XbatisInterceptor.class);
-
     private final List<InnerInterceptor> interceptors = new CopyOnWriteArrayList<>();
 
     @Override
@@ -43,7 +41,7 @@ public class XbatisInterceptor implements Interceptor {
 
             if (!isUpdate && ms.getSqlCommandType() == SqlCommandType.SELECT) {
                 RowBounds rowBounds = (RowBounds)args[2];
-                ResultHandler resultHandler = (ResultHandler)args[3];
+                ResultHandler<?> resultHandler = (ResultHandler<?>)args[3];
                 BoundSql boundSql;
                 if (args.length == 4) {
                     boundSql = ms.getBoundSql(parameter);
