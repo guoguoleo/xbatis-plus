@@ -21,13 +21,13 @@ public class JSqlParseSupports {
             Statement statement = CCJSqlParserUtil.parse(sql);
 
             if (statement instanceof Insert insert) {
-                this.processInsert(insert, boundSql);
+                this.execute(insert, boundSql);
             } else if (statement instanceof PlainSelect plainSelect) {
-                this.processSelect(plainSelect, boundSql);
+                this.execute(plainSelect, boundSql);
             } else if (statement instanceof Update update) {
-                this.processUpdate(update, boundSql);
+                this.execute(update, boundSql);
             } else if (statement instanceof Delete delete) {
-                this.processDelete(delete, boundSql);
+                this.execute(delete, boundSql);
             }
             return statement;
         } catch (JSQLParserException e) {
@@ -40,19 +40,19 @@ public class JSqlParseSupports {
     /**
      * 处理select
      */
-    protected void processInsert(Insert insert, BoundSql boundSql) {
+    protected void execute(Insert insert, BoundSql boundSql) {
         throw new UnsupportedOperationException();
     }
 
-    protected void processDelete(Delete delete, BoundSql boundSql) {
+    protected void execute(Delete delete, BoundSql boundSql) {
         throw new UnsupportedOperationException();
     }
 
-    protected void processUpdate(Update update, BoundSql boundSql) {
+    protected void execute(Update update, BoundSql boundSql) {
         throw new UnsupportedOperationException();
     }
 
-    protected void processSelect(PlainSelect plainSelect, BoundSql boundSql) {
+    protected void execute(PlainSelect plainSelect, BoundSql boundSql) {
         throw new UnsupportedOperationException();
     }
 
