@@ -1,6 +1,5 @@
 package cn.xbatis.plus;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
@@ -8,8 +7,6 @@ import cn.xbatis.core.incrementer.GeneratorFactory;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
-import cn.xbatis.plus.properties.PlusScanProperties;
-import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

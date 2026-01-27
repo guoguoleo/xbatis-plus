@@ -1,10 +1,9 @@
 package cn.xbatis.plus.base;
 
+import cn.xbatis.core.mybatis.mapper.context.Pager;
 import cn.xbatis.core.sql.executor.chain.DeleteChain;
 import cn.xbatis.core.sql.executor.chain.QueryChain;
 import cn.xbatis.core.sql.executor.chain.UpdateChain;
-import cn.xbatis.plus.dto.PagerDto;
-import cn.xbatis.plus.utils.PageUtil;
 import cn.xbatis.plus.vo.PagerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -48,9 +47,8 @@ public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
     }
 
     @Override
-    public PagerVo<T> page(PagerDto<T> pageDto) {
-        PageUtil.startPage(pageDto);
-        return new PagerVo<>(this.baseMapper.page(pageDto));
+    public PagerVo<T> page(Pager<T> pager) {
+        return new PagerVo<>(this.baseMapper.page(pager));
     }
 
     @Override

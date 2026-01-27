@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.xbatis.plus.PlusScanConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.xbatis.plus.PlusScanAutoConfiguration

@@ -18,6 +18,11 @@ public class ModifyListenerHelper {
     public void setGlobalOnUpdateListener(Object o) {
     }
 
+    /**
+     * 逻辑删除监听
+     * @param clazz 实体类
+     * @param update 更新对象
+     */
     public void setLogicDeleteInterceptor(Class<?> clazz, BaseUpdate<?> update){
     }
 

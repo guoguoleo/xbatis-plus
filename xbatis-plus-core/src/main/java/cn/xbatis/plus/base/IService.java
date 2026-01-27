@@ -1,9 +1,9 @@
 package cn.xbatis.plus.base;
 
+import cn.xbatis.core.mybatis.mapper.context.Pager;
 import cn.xbatis.core.sql.executor.chain.DeleteChain;
 import cn.xbatis.core.sql.executor.chain.QueryChain;
 import cn.xbatis.core.sql.executor.chain.UpdateChain;
-import cn.xbatis.plus.dto.PagerDto;
 import cn.xbatis.plus.vo.PagerVo;
 
 import java.io.Serializable;
@@ -52,10 +52,10 @@ public interface IService<T> {
 
     /**
      * 分页查询
-     * @param pageDto 分页参数
+     * @param pager 分页参数
      * @return 分页结果
      */
-    PagerVo<T> page(PagerDto<T> pageDto);
+    PagerVo<T> page(Pager<T> pager);
 
     /**
      * 批量保存
