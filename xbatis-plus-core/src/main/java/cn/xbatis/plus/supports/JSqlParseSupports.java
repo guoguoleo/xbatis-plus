@@ -15,7 +15,10 @@ public class JSqlParseSupports {
 
     private final Log log = Log.get(JSqlParseSupports.class);
 
-    public Statement parseStatement(BoundSql boundSql) {
+    public JSqlParseSupports() {
+    }
+
+    public String parseStatement(BoundSql boundSql) {
         try {
             String sql = boundSql.getSql();
             Statement statement = CCJSqlParserUtil.parse(sql);
@@ -29,7 +32,7 @@ public class JSqlParseSupports {
             } else if (statement instanceof Delete delete) {
                 this.execute(delete, boundSql);
             }
-            return statement;
+            return statement.toString();
         } catch (JSQLParserException e) {
             log.error("解析SQL异常", e);
             throw new RuntimeException("发生异常:" + e.getMessage(), e);
