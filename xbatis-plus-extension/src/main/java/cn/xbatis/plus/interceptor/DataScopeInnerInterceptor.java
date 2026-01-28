@@ -1,5 +1,6 @@
 package cn.xbatis.plus.interceptor;
 
+import cn.xbatis.plus.annotations.DataScope;
 import cn.xbatis.plus.supports.JSqlParseSupports;
 import cn.xbatis.plus.utils.DataScopeUtil;
 import cn.xbatis.plus.utils.PluginUtil;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
  * 自己创建一个拦截器，继承该拦截器
  * 继承该拦截器后，实现execute(PlainSelect plainSelect, BoundSql boundSql)
  */
-public class DataScopeInnerInterceptor extends JSqlParseSupports implements InnerInterceptor {
+public abstract class DataScopeInnerInterceptor extends JSqlParseSupports implements InnerInterceptor {
 
     @Override
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler<?> resultHandler, BoundSql boundSql) throws SQLException {
@@ -28,5 +29,12 @@ public class DataScopeInnerInterceptor extends JSqlParseSupports implements Inne
         PluginUtil.XBoundSql xBoundSql = PluginUtil.xBoundSql(boundSql);
         xBoundSql.sql(this.parseStatement(boundSql));
     }
+
+    @Override
+    protected void execute(PlainSelect plainSelect, BoundSql boundSql) {
+        this.executePlainSelect(plainSelect, boundSql, DataScopeUtil.getDataPermission());
+    }
+
+    protected abstract void executePlainSelect(PlainSelect plainSelect, BoundSql boundSql, DataScope dataScope);
 
 }
