@@ -1,5 +1,6 @@
 package cn.xbatis.plus.interceptor;
 
+import net.sf.jsqlparser.statement.delete.Delete;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.BatchExecutor;
 import org.apache.ibatis.executor.Executor;
@@ -100,5 +101,6 @@ public interface InnerInterceptor {
     default void beforeUpdate(Executor executor, MappedStatement ms, Object parameter) throws SQLException {
         // do nothing
     }
+
 
 }

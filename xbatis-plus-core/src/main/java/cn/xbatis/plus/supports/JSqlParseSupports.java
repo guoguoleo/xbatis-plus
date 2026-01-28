@@ -4,6 +4,7 @@ import cn.hutool.log.Log;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
+import net.sf.jsqlparser.statement.Statements;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.PlainSelect;
@@ -38,6 +39,8 @@ public class JSqlParseSupports {
         }
 
     }
+
+
 
     /**
      * 处理select
