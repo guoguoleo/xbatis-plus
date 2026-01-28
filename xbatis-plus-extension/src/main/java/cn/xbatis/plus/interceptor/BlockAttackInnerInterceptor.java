@@ -1,9 +1,7 @@
-package com.xbatis.plus.interceptor;
+package cn.xbatis.plus.interceptor;
 
 import cn.hutool.core.lang.Assert;
 import cn.hutool.log.Log;
-import cn.xbatis.core.db.reflect.TableInfo;
-import cn.xbatis.plus.interceptor.InnerInterceptor;
 import cn.xbatis.plus.supports.JSqlParseSupports;
 import cn.xbatis.plus.utils.PluginUtil;
 import net.sf.jsqlparser.expression.Expression;
@@ -14,15 +12,12 @@ import net.sf.jsqlparser.expression.operators.relational.NotEqualsTo;
 import net.sf.jsqlparser.expression.operators.relational.ParenthesedExpressionList;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.update.Update;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * 防止sql全表更新与删除

@@ -17,6 +17,13 @@
             <artifactId>xbatis-plus-core</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.25.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
