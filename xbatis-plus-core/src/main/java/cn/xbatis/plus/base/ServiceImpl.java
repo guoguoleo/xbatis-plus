@@ -52,6 +52,11 @@ public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
     }
 
     @Override
+    public boolean save(T entity) {
+        return this.baseMapper.save(entity) > 0;
+    }
+
+    @Override
     public boolean saveBatch(Collection<T> list) {
         return this.baseMapper.saveBatch(list) > 0;
     }

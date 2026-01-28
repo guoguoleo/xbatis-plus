@@ -58,6 +58,13 @@ public interface IService<T> {
     PagerVo<T> page(Pager<T> pager);
 
     /**
+     * 保存
+     * @param entity 实体
+     * @return 是否保存成功
+     */
+    boolean save(T entity);
+
+    /**
      * 批量保存
      * @param list 实体列表
      * @return 是否保存成功
