@@ -24,8 +24,6 @@ import java.sql.Connection;
  */
 public class BlockAttackInnerInterceptor extends JSqlParseSupports implements InnerInterceptor {
 
-    private final Log log = Log.get(BlockAttackInnerInterceptor.class);
-
     @Override
     public void beforePrepare(StatementHandler sh, Connection connection, Integer transactionTimeout) {
         PluginUtil.XStatementHandler handler = PluginUtil.xStatementHandler(sh);
@@ -39,13 +37,11 @@ public class BlockAttackInnerInterceptor extends JSqlParseSupports implements In
 
     @Override
     protected void execute(Update update, BoundSql boundSql) {
-        log.info("update sql: {}", update.toString());
         this.checkWhere(update.getWhere(), "禁止全局更新");
     }
 
     @Override
     protected void execute(Delete delete, BoundSql boundSql) {
-        log.info("delete sql: {}", delete.toString());
         this.checkWhere(delete.getWhere(), "禁止全局删除");
     }
 
@@ -58,7 +54,6 @@ public class BlockAttackInnerInterceptor extends JSqlParseSupports implements In
         if (where == null) {
             return true;
         }
-        log.info(where.toString());
         if (where instanceof EqualsTo equalsTo) {
             return equalsTo.getLeftExpression().toString().equals(equalsTo.getRightExpression().toString());
         } else if (where instanceof NotEqualsTo notEqualsTo) {
