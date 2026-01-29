@@ -28,6 +28,7 @@ public class GlobalGenerator {
     public ConfigurationCustomizer configurationCustomizer() {
         return configuration -> {
 
+
             configuration.addInterceptor(xbatisInterceptor);
 
             XbatisGlobalConfig.setLogicDeleteSwitch(this.plusScanProperties.getLogicDeleteSwitch());

@@ -25,7 +25,6 @@ public class DataScopeAspect {
 
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint point) throws Throwable{
-        log.info("DataScopeAspect around");
         try{
             MethodSignature signature = (MethodSignature) point.getSignature();
             Method method = signature.getMethod();
