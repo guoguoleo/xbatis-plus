@@ -4,7 +4,6 @@ import cn.xbatis.plus.annotations.DataScope;
 import cn.xbatis.plus.supports.JSqlParseSupports;
 import cn.xbatis.plus.utils.DataScopeUtil;
 import cn.xbatis.plus.utils.PluginUtil;
-import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;

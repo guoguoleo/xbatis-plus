@@ -1,7 +1,6 @@
 package cn.xbatis.plus.interceptor;
 
 import cn.hutool.core.lang.Assert;
-import cn.hutool.log.Log;
 import cn.xbatis.plus.supports.JSqlParseSupports;
 import cn.xbatis.plus.utils.PluginUtil;
 import net.sf.jsqlparser.expression.Expression;

@@ -5,6 +5,7 @@ import cn.xbatis.core.sql.executor.chain.DeleteChain;
 import cn.xbatis.core.sql.executor.chain.QueryChain;
 import cn.xbatis.core.sql.executor.chain.UpdateChain;
 import cn.xbatis.plus.vo.PagerVo;
+import db.sql.api.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -70,6 +71,17 @@ public class ServiceImpl<D extends BaseMapper<T>, T> implements IService<T> {
     public boolean updateBatchById(Collection<T> list) {
         return this.baseMapper.updateBatch(list) > 0;
     }
+
+    @Override
+    public boolean update(T entity) {
+        return this.baseMapper.update(entity) > 0;
+    }
+
+    @Override
+    public boolean update(T entity, Getter<T>... getter) {
+        return this.baseMapper.update(entity, getter) > 0;
+    }
+
 
     @Override
     public boolean saveOrUpdate(T entity) {
