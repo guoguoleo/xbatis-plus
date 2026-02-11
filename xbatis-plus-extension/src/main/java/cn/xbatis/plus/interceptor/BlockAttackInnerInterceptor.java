@@ -53,15 +53,20 @@ public class BlockAttackInnerInterceptor extends JSqlParseSupports implements In
         if (where == null) {
             return true;
         }
-        if (where instanceof EqualsTo equalsTo) {
+        if (where instanceof EqualsTo) {
+            EqualsTo equalsTo = (EqualsTo) where;
             return equalsTo.getLeftExpression().toString().equals(equalsTo.getRightExpression().toString());
-        } else if (where instanceof NotEqualsTo notEqualsTo) {
+        } else if (where instanceof NotEqualsTo) {
+            NotEqualsTo notEqualsTo = (NotEqualsTo) where;
             return !notEqualsTo.getLeftExpression().toString().equals(notEqualsTo.getRightExpression().toString());
-        } else if (where instanceof OrExpression orExpression) {
+        } else if (where instanceof OrExpression) {
+            OrExpression orExpression = (OrExpression)where;
             this.fullMatch(orExpression.getRightExpression());
-        } else if (where instanceof AndExpression andExpression) {
+        } else if (where instanceof AndExpression) {
+            AndExpression andExpression = (AndExpression)where;
             this.fullMatch(andExpression.getRightExpression());
-        } else if (where instanceof ParenthesedExpressionList<?> parenthesedExpressionList) {
+        } else if (where instanceof ParenthesedExpressionList<?>) {
+            ParenthesedExpressionList<?> parenthesedExpressionList = (ParenthesedExpressionList<?>)where;
             this.fullMatch(parenthesedExpressionList.get(0));
         }
 

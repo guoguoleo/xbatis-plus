@@ -22,13 +22,17 @@ public class JSqlParseSupports {
             String sql = boundSql.getSql();
             Statement statement = CCJSqlParserUtil.parse(sql);
 
-            if (statement instanceof Insert insert) {
+            if (statement instanceof Insert) {
+                Insert insert = (Insert) statement;
                 this.execute(insert, boundSql);
-            } else if (statement instanceof PlainSelect plainSelect) {
+            } else if (statement instanceof PlainSelect) {
+                PlainSelect plainSelect = (PlainSelect) statement;
                 this.execute(plainSelect, boundSql);
-            } else if (statement instanceof Update update) {
+            } else if (statement instanceof Update) {
+                Update update = (Update) statement;
                 this.execute(update, boundSql);
-            } else if (statement instanceof Delete delete) {
+            } else if (statement instanceof Delete) {
+                Delete delete = (Delete) statement;
                 this.execute(delete, boundSql);
             }
             return statement.toString();
@@ -38,7 +42,6 @@ public class JSqlParseSupports {
         }
 
     }
-
 
 
     /**

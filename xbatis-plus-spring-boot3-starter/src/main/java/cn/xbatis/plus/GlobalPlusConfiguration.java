@@ -4,7 +4,6 @@ import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
-import cn.xbatis.core.mybatis.mapper.BasicMapper;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.io.Serializable;
 
-public class GlobalGenerator {
+public class GlobalPlusConfiguration {
 
     @Autowired
     private ModifyListenerHelper modifyListenerHelper;

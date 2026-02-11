@@ -23,15 +23,15 @@ public class DataScopeUtil {
         if (obj == NULL) {
             return null;
         }
-        if (obj instanceof DataScope dataScope){
-            return dataScope;
+        if (obj instanceof DataScope){
+            return (DataScope)obj;
         }else {
             return null;
         }
     }
 
     public static void setDataPermission(DataScope dataScope) {
-        TL.get().addLast(Objects.requireNonNullElse(dataScope, NULL));
+        TL.get().addLast(dataScope);
     }
 
 

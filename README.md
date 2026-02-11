@@ -2,7 +2,7 @@
 
 #### 介绍
 
-xbatis封装，向mybatisplus靠拢
+xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
 
 #### 软件架构
 

@@ -32,19 +32,20 @@ public class XbatisInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         Object target = invocation.getTarget();
         Object[] args = invocation.getArgs();
-        if (target instanceof Executor executor){
+        if (target instanceof Executor) {
+            Executor executor = (Executor) target;
             Object parameter = args[1];
             boolean isUpdate = args.length == 2;
-            MappedStatement ms = (MappedStatement)args[0];
+            MappedStatement ms = (MappedStatement) args[0];
 
             if (!isUpdate && ms.getSqlCommandType() == SqlCommandType.SELECT) {
-                RowBounds rowBounds = (RowBounds)args[2];
-                ResultHandler<?> resultHandler = (ResultHandler<?>)args[3];
+                RowBounds rowBounds = (RowBounds) args[2];
+                ResultHandler<?> resultHandler = (ResultHandler<?>) args[3];
                 BoundSql boundSql;
                 if (args.length == 4) {
                     boundSql = ms.getBoundSql(parameter);
                 } else {
-                    boundSql = (BoundSql)args[5];
+                    boundSql = (BoundSql) args[5];
                 }
 
                 for (InnerInterceptor interceptor : this.interceptors) {
@@ -58,7 +59,7 @@ public class XbatisInterceptor implements Interceptor {
                 return executor.query(ms, parameter, rowBounds, resultHandler, cacheKey, boundSql);
 
 
-            }else if (isUpdate) {
+            } else if (isUpdate) {
                 for (InnerInterceptor interceptor : interceptors) {
                     if (!interceptor.willDoUpdate(executor, ms, parameter)) {
                         return -1;
@@ -67,21 +68,22 @@ public class XbatisInterceptor implements Interceptor {
                 }
             }
 
-        }else if (target instanceof StatementHandler statementHandler){
-            if (null == args){
+        } else if (target instanceof StatementHandler) {
+            StatementHandler statementHandler = (StatementHandler) target;
+            if (null == args) {
                 for (InnerInterceptor interceptor : this.interceptors) {
                     interceptor.beforeGetBoundSql(statementHandler);
                 }
-            }else {
-                Connection connections = (Connection)args[0];
-                Integer transactionTimeout = (Integer)args[1];
+            } else {
+                Connection connections = (Connection) args[0];
+                Integer transactionTimeout = (Integer) args[1];
                 for (InnerInterceptor interceptor : this.interceptors) {
                     interceptor.beforePrepare(statementHandler, connections, transactionTimeout);
                 }
             }
 
 
-        }else {
+        } else {
             invocation.proceed();
         }
 
