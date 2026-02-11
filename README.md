@@ -20,12 +20,12 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
      </dependency>
    ```
 
-3. 创建配置类继承GlobalGenerator,如下
+3. 创建配置类继承GlobalPlusConfiguration,如下
    ```java
     @XbatisPojoCheckScan(basePackages = "com.**.**.entity")
     @MapperScans(value = {@MapperScan(basePackages = "com.**.**.dao")})
     @SpringBootConfiguration
-    public class MybatisConfig extends GlobalGenerator {
+    public class MybatisConfig extends GlobalPlusConfiguration {
     }
     ```
 
@@ -41,7 +41,7 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
       @XbatisPojoCheckScan(basePackages = "com.**.**.entity")
       @MapperScans(value = {@MapperScan(basePackages = "com.**.**.dao")})
       @SpringBootConfiguration
-      public class MybatisConfig extends GlobalGenerator {
+      public class MybatisConfig extends GlobalPlusConfiguration {
 
           @Bean
           public XbatisInterceptor xbatisInterceptor() {
