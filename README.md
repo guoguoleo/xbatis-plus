@@ -13,11 +13,11 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
 1. maven install打包
 2. 项目引入
    ```xml
-   <dependency>
-       <groupId>cn.xbatis.plus</groupId>
-       <artifactId>xbatis-plus-core</artifactId>
-       <version>1.0.0</version>
-   </dependency>
+     <dependency>
+        <groupId>cn.xbatis.plus</groupId>
+        <artifactId>xbatis-plus-spring-boot3-starter</artifactId>
+        <version>1.0.0</version>
+     </dependency>
    ```
 
 3. 创建配置类继承GlobalGenerator,如下
