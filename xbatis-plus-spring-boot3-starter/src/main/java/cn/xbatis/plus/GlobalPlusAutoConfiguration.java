@@ -6,24 +6,44 @@ import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
+import cn.xbatis.plus.helper.XbatisHelper;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
-import cn.xbatis.plus.mapper.MybatisBasicMapper;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
+import javax.sql.DataSource;
 import java.io.Serializable;
 
-public class GlobalPlusConfiguration {
+@Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(
+        value = {SqlSessionFactory.class, SqlSessionFactoryBean.class},
+        name = {
+                "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
+        }
+)
+@ConditionalOnSingleCandidate(DataSource.class)
+@EnableConfigurationProperties(GlobalPlusProperties.class)
+@Import(value = {XbatisHelper.class, XbatisInterceptor.class})
+public class GlobalPlusAutoConfiguration implements InitializingBean {
+
 
     @Autowired
-    private ModifyListenerHelper modifyListenerHelper;
-
-    @Autowired
-    private PlusScanProperties plusScanProperties;
+    private GlobalPlusProperties globalPlusProperties;
 
     @Autowired
     private XbatisInterceptor xbatisInterceptor;
+
+    @Autowired
+    private ModifyListenerHelper modifyListenerHelper;
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
@@ -32,28 +52,25 @@ public class GlobalPlusConfiguration {
 
             configuration.addInterceptor(xbatisInterceptor);
 
-            XbatisGlobalConfig.setLogicDeleteSwitch(this.plusScanProperties.getLogicDeleteSwitch());
+            XbatisGlobalConfig.setLogicDeleteSwitch(this.globalPlusProperties.getLogicDeleteSwitch());
             //region 加载自定义id
             GeneratorFactory.register(IdGeneratorConstant.snow, new SnowIdHelper());
             GeneratorFactory.register(IdGeneratorConstant.uuid, new UuidHelper());
             GeneratorFactory.register(IdGeneratorConstant.simpleUuid, new SimpleUuidGenerator());
             //endregion
             //插入数据监听
-            XbatisGlobalConfig.setGlobalOnInsertListener(o -> modifyListenerHelper.setGlobalOnInsertListener(o));
+            XbatisGlobalConfig.setGlobalOnInsertListener(modifyListenerHelper::setGlobalOnInsertListener);
             //更新数据监听
-            XbatisGlobalConfig.setGlobalOnUpdateListener(o -> modifyListenerHelper.setGlobalOnUpdateListener(o));
+            XbatisGlobalConfig.setGlobalOnUpdateListener(modifyListenerHelper::setGlobalOnUpdateListener);
             //逻辑删除监听
-            XbatisGlobalConfig.setLogicDeleteInterceptor((clazz, update) ->
-                    modifyListenerHelper.setLogicDeleteInterceptor(clazz, update));
-
-            //开启官方mapper方法拦截器设置
-            XbatisGlobalConfig.enableInterceptOfficialMapperMethod();
-
-            //配置全局单mapper
-            XbatisGlobalConfig.setSingleMapperClass(MybatisBasicMapper.class);
-
+            XbatisGlobalConfig.setLogicDeleteInterceptor(modifyListenerHelper::setLogicDeleteInterceptor);
 
         };
+
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
     }
 

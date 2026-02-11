@@ -1,11 +1,9 @@
 package cn.xbatis.plus;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-@Component
 @ConfigurationProperties(prefix = "plus")
-public class PlusScanProperties {
+public class GlobalPlusProperties {
 
     private boolean logicDeleteSwitch = false;
 

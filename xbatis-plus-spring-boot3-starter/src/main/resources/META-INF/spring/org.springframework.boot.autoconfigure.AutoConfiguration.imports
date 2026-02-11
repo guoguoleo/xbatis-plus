@@ -1,1 +1,2 @@
-cn.xbatis.plus.PlusScanAutoConfiguration
+cn.xbatis.plus.GlobalPlusAutoConfiguration
+cn.xbatis.plus.interceptor.XbatisInterceptor

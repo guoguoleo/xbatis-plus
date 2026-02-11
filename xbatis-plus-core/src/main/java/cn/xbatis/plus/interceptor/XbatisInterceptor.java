@@ -9,6 +9,7 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.util.Collections;
