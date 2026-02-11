@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.xbatis.plus</groupId>
         <artifactId>xbatis-plus</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>xbatis-plus-core</artifactId>
