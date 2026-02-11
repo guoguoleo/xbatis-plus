@@ -16,7 +16,7 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
      <dependency>
         <groupId>cn.xbatis.plus</groupId>
         <artifactId>xbatis-plus-spring-boot3-starter</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
      </dependency>
    ```
 
