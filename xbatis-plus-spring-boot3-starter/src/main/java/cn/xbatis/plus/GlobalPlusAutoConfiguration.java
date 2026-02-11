@@ -42,7 +42,7 @@ public class GlobalPlusAutoConfiguration implements InitializingBean {
     @Autowired
     private XbatisInterceptor xbatisInterceptor;
 
-    @Autowired
+    @Autowired(required = false)
     private ModifyListenerHelper modifyListenerHelper;
 
     @Bean
@@ -58,13 +58,14 @@ public class GlobalPlusAutoConfiguration implements InitializingBean {
             GeneratorFactory.register(IdGeneratorConstant.uuid, new UuidHelper());
             GeneratorFactory.register(IdGeneratorConstant.simpleUuid, new SimpleUuidGenerator());
             //endregion
-            //插入数据监听
-            XbatisGlobalConfig.setGlobalOnInsertListener(modifyListenerHelper::setGlobalOnInsertListener);
-            //更新数据监听
-            XbatisGlobalConfig.setGlobalOnUpdateListener(modifyListenerHelper::setGlobalOnUpdateListener);
-            //逻辑删除监听
-            XbatisGlobalConfig.setLogicDeleteInterceptor(modifyListenerHelper::setLogicDeleteInterceptor);
-
+            if (this.modifyListenerHelper != null) {
+                //插入数据监听
+                XbatisGlobalConfig.setGlobalOnInsertListener(modifyListenerHelper::setGlobalOnInsertListener);
+                //更新数据监听
+                XbatisGlobalConfig.setGlobalOnUpdateListener(modifyListenerHelper::setGlobalOnUpdateListener);
+                //逻辑删除监听
+                XbatisGlobalConfig.setLogicDeleteInterceptor(modifyListenerHelper::setLogicDeleteInterceptor);
+            }
         };
 
     }

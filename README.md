@@ -20,14 +20,44 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
      </dependency>
    ```
 
-3. 创建配置类继承GlobalPlusConfiguration,如下
+3. mybatis配置,如下
    ```java
     @XbatisPojoCheckScan(basePackages = "com.**.**.entity")
     @MapperScans(value = {@MapperScan(basePackages = "com.**.**.dao")})
     @SpringBootConfiguration
-    public class MybatisConfig extends GlobalPlusConfiguration {
+    public class MybatisConfig {
     }
     ```
+4. 继承ModifyListenerHelper，可以实现数据插入/更新/删除时候监听
+   ```java
+    @Component
+    public class ModifyListener extends ModifyListenerHelper {
+        /**
+        * 全局插入数据监听
+        * @param o 实体对象
+        */
+        public void setGlobalOnInsertListener(Object o) {
+            //插入时处理逻辑
+        }
+
+        /**
+         * 全局更新数据监听
+         * @param o 实体对象
+         */
+        public void setGlobalOnUpdateListener(Object o) {
+             //更新时处理逻辑
+        }
+
+         /**
+         * 逻辑删除监听
+         * @param clazz 实体类
+         * @param update 更新对象
+         */
+        public void setLogicDeleteInterceptor(Class<?> clazz, BaseUpdate<?> update){
+            //逻辑删除时处理逻辑
+        }
+    }
+   ```
 
 #### 使用说明
 
@@ -41,7 +71,7 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
       @XbatisPojoCheckScan(basePackages = "com.**.**.entity")
       @MapperScans(value = {@MapperScan(basePackages = "com.**.**.dao")})
       @SpringBootConfiguration
-      public class MybatisConfig extends GlobalPlusConfiguration {
+      public class MybatisConfig {
 
           @Bean
           public XbatisInterceptor xbatisInterceptor() {
