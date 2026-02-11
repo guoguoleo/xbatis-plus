@@ -4,9 +4,11 @@ import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
+import cn.xbatis.core.mybatis.mapper.BasicMapper;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
+import cn.xbatis.plus.mapper.MybatisBasicMapper;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,8 +47,12 @@ public class GlobalGenerator {
             XbatisGlobalConfig.setLogicDeleteInterceptor((clazz, update) ->
                     modifyListenerHelper.setLogicDeleteInterceptor(clazz, update));
 
-
+            //开启官方mapper方法拦截器设置
             XbatisGlobalConfig.enableInterceptOfficialMapperMethod();
+
+            //配置全局单mapper
+            XbatisGlobalConfig.setSingleMapperClass(MybatisBasicMapper.class);
+
 
         };
 
