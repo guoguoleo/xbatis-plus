@@ -16,7 +16,7 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
      <dependency>
         <groupId>cn.xbatis.plus</groupId>
         <artifactId>xbatis-plus-spring-boot3-starter</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
      </dependency>
    ```
 
@@ -83,6 +83,27 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
       }
 
    ```
+5.多数据源支持
+实现DynamicPlugins接口，并且实现getKey(MappedStatement ms)方法，例子如下：
+```java
+    @Slf4j
+    @Component
+    public class ReadWriteSplitInterceptor implements DynamicPlugins {
+
+        @Override
+        public String getKey(MappedStatement ms) {
+            SqlCommandType sct = ms.getSqlCommandType();
+            if (sct == SqlCommandType.SELECT) {
+                return "master";
+            }
+            return "log";
+        }
+    }
+```
+
+更新说明：
+2026-02-12 1.0.2 
+feat:增加多数据源支持
 
 #### 参与贡献
 

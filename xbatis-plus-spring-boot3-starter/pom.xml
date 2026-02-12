@@ -6,7 +6,7 @@
     <parent>
         <groupId>cn.xbatis.plus</groupId>
         <artifactId>xbatis-plus</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>xbatis-plus-spring-boot3-starter</artifactId>
@@ -21,14 +21,8 @@
     <dependencies>
         <dependency>
             <groupId>cn.xbatis.plus</groupId>
-            <artifactId>xbatis-plus-core</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-extra</artifactId>
-            <version>5.8.43</version>
+            <artifactId>xbatis-plus-extension</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>
@@ -43,6 +37,8 @@
             <version>3.5.10</version>
             <optional>true</optional>
         </dependency>
+
+
 
     </dependencies>
 

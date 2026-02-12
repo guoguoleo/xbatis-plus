@@ -6,7 +6,7 @@
 
     <groupId>cn.xbatis.plus</groupId>
     <artifactId>xbatis-plus</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <modules>
         <module>xbatis-plus-core</module>
@@ -19,37 +19,6 @@
     </properties>
 
 
-    <dependencies>
-        <dependency>
-            <groupId>cn.xbatis</groupId>
-            <artifactId>xbatis-spring-boot-starter</artifactId>
-            <version>1.9.8-M2-spring-boot3</version>
-        </dependency>
 
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-            <version>5.8.43</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-log</artifactId>
-            <version>5.8.22</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.jsqlparser</groupId>
-            <artifactId>jsqlparser</artifactId>
-            <version>4.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.20.0</version>
-        </dependency>
-
-    </dependencies>
 
 </project>

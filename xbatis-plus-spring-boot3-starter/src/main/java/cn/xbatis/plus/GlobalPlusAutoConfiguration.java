@@ -7,6 +7,7 @@ import cn.xbatis.core.incrementer.GeneratorFactory;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.helper.XbatisHelper;
+import cn.xbatis.plus.interceptor.MultipleSplitInterceptor;
 import cn.xbatis.plus.interceptor.XbatisInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -32,7 +33,7 @@ import java.io.Serializable;
 )
 @ConditionalOnSingleCandidate(DataSource.class)
 @EnableConfigurationProperties(GlobalPlusProperties.class)
-@Import(value = {XbatisHelper.class, XbatisInterceptor.class})
+@Import(value = {XbatisHelper.class, XbatisInterceptor.class, MultipleSplitInterceptor.class})
 public class GlobalPlusAutoConfiguration implements InitializingBean {
 
 
@@ -45,12 +46,18 @@ public class GlobalPlusAutoConfiguration implements InitializingBean {
     @Autowired(required = false)
     private ModifyListenerHelper modifyListenerHelper;
 
+    @Autowired(required = false)
+    private MultipleSplitInterceptor multipleSplitInterceptor;
+
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {
         return configuration -> {
 
+            if (this.multipleSplitInterceptor != null) {
+                configuration.addInterceptor(this.multipleSplitInterceptor);
+            }
 
-            configuration.addInterceptor(xbatisInterceptor);
+            configuration.addInterceptor(this.xbatisInterceptor);
 
             XbatisGlobalConfig.setLogicDeleteSwitch(this.globalPlusProperties.getLogicDeleteSwitch());
             //region 加载自定义id
@@ -66,7 +73,10 @@ public class GlobalPlusAutoConfiguration implements InitializingBean {
                 //逻辑删除监听
                 XbatisGlobalConfig.setLogicDeleteInterceptor(modifyListenerHelper::setLogicDeleteInterceptor);
             }
+
+
         };
+
 
     }
 

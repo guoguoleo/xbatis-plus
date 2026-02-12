@@ -82,10 +82,6 @@ public class XbatisInterceptor implements Interceptor {
                     interceptor.beforePrepare(statementHandler, connections, transactionTimeout);
                 }
             }
-
-
-        } else {
-            invocation.proceed();
         }
 
         return invocation.proceed();
