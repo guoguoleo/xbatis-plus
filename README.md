@@ -85,6 +85,9 @@ xbatis封装，向mybatisplus靠拢,仅支持springboot3版本
    ```
 5.多数据源支持
 实现DynamicPlugins接口，并且实现getKey(MappedStatement ms)方法，例子如下：
+说明：
+类或者方法上有@DS注解最优先
+返回空字符串或空对象，则使用默认配置
 ```java
     @Slf4j
     @Component
