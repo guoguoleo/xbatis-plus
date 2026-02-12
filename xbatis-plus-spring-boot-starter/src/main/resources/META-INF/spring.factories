@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.xbatis.plus.GlobalPlusAutoConfiguration,\
+  cn.xbatis.plus.interceptor.XbatisInterceptor

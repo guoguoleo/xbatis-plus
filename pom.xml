@@ -12,6 +12,7 @@
         <module>xbatis-plus-core</module>
         <module>xbatis-plus-extension</module>
         <module>xbatis-plus-spring-boot3-starter</module>
+        <module>xbatis-plus-spring-boot-starter</module>
     </modules>
 
     <properties>
