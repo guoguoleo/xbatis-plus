@@ -22,7 +22,7 @@
         <dependency>
             <groupId>cn.xbatis.plus</groupId>
             <artifactId>xbatis-plus-extension</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
