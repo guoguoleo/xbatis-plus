@@ -4,6 +4,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.xbatis.core.XbatisGlobalConfig;
 import cn.xbatis.core.incrementer.Generator;
 import cn.xbatis.core.incrementer.GeneratorFactory;
+import cn.xbatis.plus.aspect.DataScopeAspect;
 import cn.xbatis.plus.constants.IdGeneratorConstant;
 import cn.xbatis.plus.helper.ModifyListenerHelper;
 import cn.xbatis.plus.helper.XbatisHelper;
@@ -33,7 +34,7 @@ import java.io.Serializable;
 )
 @ConditionalOnSingleCandidate(DataSource.class)
 @EnableConfigurationProperties(GlobalPlusProperties.class)
-@Import(value = {XbatisHelper.class, XbatisInterceptor.class, MultipleSplitInterceptor.class})
+@Import(value = {XbatisHelper.class, XbatisInterceptor.class, MultipleSplitInterceptor.class, DataScopeAspect.class})
 public class GlobalPlusAutoConfiguration implements InitializingBean {
 
 
